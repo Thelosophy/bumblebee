@@ -1,10 +1,10 @@
-import pytz
+import zoneinfo
 import datetime
 import markdown
 import re
 from email import utils
 
-tz = pytz.timezone('UTC') # insert timezone here
+tz = zoneinfo.ZoneInfo("UTC") # insert timezone here
 site = ""
 
 def fread(path):
@@ -116,8 +116,7 @@ def md(filename):
 	updateindex(formatted, title, descr, tags, projects)
 
 def rss(title, link, description):
-	nowdt = datetime.datetime.now()
-	nowdt = tz.localize(nowdt)
+	nowdt = datetime.datetime.now(tz)
 	date = utils.format_datetime(nowdt)
 
 	item = "<ttl>20000</ttl>\n\n\t<item>\n\t\t<title>" + title
